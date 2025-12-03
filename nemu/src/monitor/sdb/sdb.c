@@ -58,7 +58,7 @@ static int cmd_info(char *args) {
     return -1;
   }
 
-  if (strcmp(args, "r")) {
+  if (strcmp(args, "r") == 0) {
     isa_reg_display();
   } else {
     return -1;
