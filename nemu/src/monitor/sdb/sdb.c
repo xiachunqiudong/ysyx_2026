@@ -42,6 +42,17 @@ static char* rl_gets() {
   return line_read;
 }
 
+static int cmd_si(char *args) {
+  uint64_t step;
+  if (args == NULL) {
+    step = 1L;
+  } else {
+    sscanf(args, "%ld", &step);
+  }
+  cpu_exec(step);
+  return 0;
+}
+
 static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
@@ -61,6 +72,7 @@ static struct {
 } cmd_table [] = {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
+  { "si", "Single step execution of the program ", cmd_si },
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
