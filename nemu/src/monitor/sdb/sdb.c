@@ -53,6 +53,20 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+static int cmd_info(char *args) {
+  if (args == NULL) {
+    return -1;
+  }
+
+  if (strcmp(args, "r")) {
+    isa_reg_display();
+  } else {
+    return -1;
+  }
+
+  return 0;
+}
+
 static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
@@ -71,9 +85,10 @@ static struct {
   int (*handler) (char *);
 } cmd_table [] = {
   { "help", "Display information about all supported commands", cmd_help },
-  { "c", "Continue the execution of the program", cmd_c },
-  { "si", "Single step execution of the program ", cmd_si },
-  { "q", "Exit NEMU", cmd_q },
+  { "info", "Display information about regfile or watchPoint",  cmd_info },
+  { "c",    "Continue the execution of the program",            cmd_c    },
+  { "si",   "Single step execution of the program ",            cmd_si   },
+  { "q",    "Exit NEMU",                                        cmd_q    },
 
   /* TODO: Add more commands */
 
