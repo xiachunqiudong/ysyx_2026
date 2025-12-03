@@ -1,4 +1,4 @@
-BUILD_DIR = ./build
+BUILD_DIR = $(XCORE_HOME)/chisel_gen
 
 PRJ = xcore
 
@@ -8,6 +8,7 @@ test:
 verilog:
 	mkdir -p $(BUILD_DIR)
 	mill -i $(PRJ).runMain Elaborate --target-dir $(BUILD_DIR)
+	python3 $(XCORE_HOME)/tools/filelist.py $(BUILD_DIR)
 
 help:
 	mill -i $(PRJ).runMain Elaborate --help

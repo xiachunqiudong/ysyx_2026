@@ -2,6 +2,7 @@ object Elaborate extends App {
 
   val firtoolOptions = Array(
     "-O=release",
+    "--disable-opt",
     "--disable-all-randomization",
     "--split-verilog",
     "-strip-debug-info",
@@ -13,5 +14,5 @@ object Elaborate extends App {
     "--verilog"
   )
 
-  circt.stage.ChiselStage.emitSystemVerilogFile(new ifu.ifuTop(), args, firtoolOptions)
+  circt.stage.ChiselStage.emitSystemVerilogFile(new xcore.XcoreTop(), args, firtoolOptions)
 }
