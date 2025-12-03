@@ -1,6 +1,6 @@
 BUILD_DIR = ./build
 
-PRJ = playground
+PRJ = xcore
 
 test:
 	/home/host/env/graalvm_jdk/bin/java -jar mill -i $(PRJ).test
