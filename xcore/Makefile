@@ -1,4 +1,4 @@
-BUILD_DIR = $(XCORE_HOME)/chisel_gen
+BUILD_DIR = $(XCORE_HOME)/rtl/chisel_gen
 
 PRJ = xcore
 

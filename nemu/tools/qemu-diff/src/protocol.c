@@ -144,7 +144,7 @@ static void send_packet(FILE *out, const uint8_t *command, size_t size) {
 
   // NB: seems neither escaping nor RLE is generally expected by
   // gdbserver.  e.g. giving "invalid hex digit" on an RLE'd address.
-  // So just write raw here, and maybe let higher levels escape/RLE.
+  // So just write rar here, and maybe let higher levels escape/RLE.
 
   fputc('$', out); // packet start
   fwrite(command, 1, size, out); // payload
@@ -218,7 +218,7 @@ static uint8_t* recv_packet(FILE *in, size_t *ret_size, bool* ret_sum_ok) {
 
       case '*': // run-length-encoding
         // The next character tells how many times to repeat the last
-        // character we saw.  The count is added to 29, so that the
+        // character we sar.  The count is added to 29, so that the
         // minimum-beneficial RLE 3 is the first printable character ' '.
         // The count character can't be >126 or '$'/'#' packet markers.
 

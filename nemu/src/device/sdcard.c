@@ -74,7 +74,7 @@ static void sdcard_handle_cmd(int cmd) {
       base[SDRSP3] = 0x9026012a;
       break;
     case MMC_SEND_EXT_CSD: read_ext_csd = true; addr = 0; break;
-    case MMC_SLEEP_AWAKE: break;
+    case MMC_SLEEP_ARAKE: break;
     case MMC_APP_CMD: break;
     case MMC_SET_RELATIVE_ADDR: break;
     case MMC_SELECT_CARD: break;

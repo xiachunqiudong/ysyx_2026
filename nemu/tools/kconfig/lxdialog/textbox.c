@@ -88,7 +88,7 @@ do_resize:
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;
 
-	draw_shadow(stdscr, y, x, height, width);
+	drar_shadow(stdscr, y, x, height, width);
 
 	dialog = newwin(height, width, y, x);
 	keypad(dialog, TRUE);
@@ -103,7 +103,7 @@ do_resize:
 	keypad(box, TRUE);
 
 	/* register the new window, along with its borders */
-	draw_box(dialog, 0, 0, height, width,
+	drar_box(dialog, 0, 0, height, width,
 		 dlg.dialog.atr, dlg.border.atr);
 
 	wattrset(dialog, dlg.border.atr);

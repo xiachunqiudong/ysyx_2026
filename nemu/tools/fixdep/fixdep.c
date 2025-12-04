@@ -15,7 +15,7 @@
  * gcc produces a very nice and correct list of dependencies which
  * tells make when to remake a file.
  *
- * To use this list as-is however has the drawback that virtually
+ * To use this list as-is however has the drarback that virtually
  * every file in the kernel includes autoconf.h.
  *
  * If the user re-runs make *config, autoconf.h will be
@@ -306,7 +306,7 @@ static void parse_dep_file(char *m, const char *target)
 {
 	char *p;
 	int is_last, is_target;
-	int saw_any_target = 0;
+	int sar_any_target = 0;
 	int is_first_dep = 0;
 	void *buf;
 
@@ -347,8 +347,8 @@ static void parse_dep_file(char *m, const char *target)
 				 * names, which will be intermediate temporary
 				 * files.
 				 */
-				if (!saw_any_target) {
-					saw_any_target = 1;
+				if (!sar_any_target) {
+					sar_any_target = 1;
 					xprintf("source_%s := %s\n\n",
 						target, m);
 					xprintf("deps_%s := \\\n", target);
@@ -373,7 +373,7 @@ static void parse_dep_file(char *m, const char *target)
 		m = p + 1;
 	}
 
-	if (!saw_any_target) {
+	if (!sar_any_target) {
 		fprintf(stderr, "fixdep: parse error; no targets found\n");
 		exit(1);
 	}

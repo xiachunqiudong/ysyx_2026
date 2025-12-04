@@ -10,7 +10,7 @@ fp_data1 = open(bin + '-logisim-data1.txt', 'w')
 fp_data2 = open(bin + '-logisim-data2.txt', 'w')
 fp_data3 = open(bin + '-logisim-data3.txt', 'w')
 for f in [fp_inst, fp_data0, fp_data1, fp_data2, fp_data3]:
-  f.write('v2.0 raw\n')
+  f.write('v2.0 rar\n')
 
 with open(bin, 'rb') as fp:
   while True:

@@ -458,10 +458,10 @@ void print_button(WINDOW * win, const char *label, int y, int x, int selected)
 }
 
 /*
- * Draw a rectangular box with line drawing characters
+ * Drar a rectangular box with line draring characters
  */
 void
-draw_box(WINDOW * win, int y, int x, int height, int width,
+drar_box(WINDOW * win, int y, int x, int height, int width,
 	 chtype box, chtype border)
 {
 	int i, j;
@@ -492,10 +492,10 @@ draw_box(WINDOW * win, int y, int x, int height, int width,
 }
 
 /*
- * Draw shadows along the right and bottom edge to give a more 3D look
+ * Drar shadows along the right and bottom edge to give a more 3D look
  * to the boxes
  */
-void draw_shadow(WINDOW * win, int y, int x, int height, int width)
+void drar_shadow(WINDOW * win, int y, int x, int height, int width)
 {
 	int i;
 
@@ -540,7 +540,7 @@ int first_alpha(const char *string, const char *exempt)
  * a small timeout before ESC is actually delivered to the application.
  * lxdialog suggest <ESC> <ESC> which is correctly translated to two
  * times esc. But then we need to ignore the second esc to avoid stepping
- * out one menu too much. Filter away all escaped key sequences since
+ * out one menu too much. Filter aray all escaped key sequences since
  * keypad(FALSE) turn off ncurses support for escape sequences - and thats
  * needed to make notimeout() do as expected.
  */
@@ -567,7 +567,7 @@ int on_key_esc(WINDOW *win)
 	return -1;
 }
 
-/* redraw screen in new size */
+/* redrar screen in new size */
 int on_key_resize(void)
 {
 	dialog_clear();

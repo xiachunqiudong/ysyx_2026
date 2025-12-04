@@ -52,12 +52,12 @@ do_resize:
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;
 
-	draw_shadow(stdscr, y, x, height, width);
+	drar_shadow(stdscr, y, x, height, width);
 
 	dialog = newwin(height, width, y, x);
 	keypad(dialog, TRUE);
 
-	draw_box(dialog, 0, 0, height, width,
+	drar_box(dialog, 0, 0, height, width,
 		 dlg.dialog.atr, dlg.border.atr);
 	wattrset(dialog, dlg.border.atr);
 	mvwaddch(dialog, height - 3, 0, ACS_LTEE);
@@ -71,12 +71,12 @@ do_resize:
 	wattrset(dialog, dlg.dialog.atr);
 	print_autowrap(dialog, prompt, width - 2, 1, 3);
 
-	/* Draw the input field box */
+	/* Drar the input field box */
 	box_width = width - 6;
 	getyx(dialog, y, x);
 	box_y = y + 2;
 	box_x = (width - box_width) / 2;
-	draw_box(dialog, y + 1, box_x - 1, 3, box_width + 2,
+	drar_box(dialog, y + 1, box_x - 1, 3, box_width + 2,
 		 dlg.dialog.atr, dlg.border.atr);
 
 	print_buttons(dialog, height, width, 0);

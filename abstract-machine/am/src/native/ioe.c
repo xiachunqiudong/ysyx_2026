@@ -17,7 +17,7 @@ void __am_timer_uptime(AM_TIMER_UPTIME_T *);
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *);
 void __am_gpu_config(AM_GPU_CONFIG_T *);
 void __am_gpu_status(AM_GPU_STATUS_T *);
-void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *);
+void __am_gpu_fbdrar(AM_GPU_FBDRAR_T *);
 void __am_uart_config(AM_UART_CONFIG_T *);
 void __am_uart_tx(AM_UART_TX_T *);
 void __am_uart_rx(AM_UART_RX_T *);
@@ -38,7 +38,7 @@ static void *lut[128] = {
   [AM_INPUT_CONFIG] = __am_input_config,
   [AM_INPUT_KEYBRD] = __am_input_keybrd,
   [AM_GPU_CONFIG  ] = __am_gpu_config,
-  [AM_GPU_FBDRAW  ] = __am_gpu_fbdraw,
+  [AM_GPU_FBDRAR  ] = __am_gpu_fbdrar,
   [AM_GPU_STATUS  ] = __am_gpu_status,
   [AM_UART_CONFIG ] = __am_uart_config,
   [AM_UART_TX     ] = __am_uart_tx,

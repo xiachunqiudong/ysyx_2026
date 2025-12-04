@@ -187,10 +187,10 @@ static void gpu_config(AM_GPU_CONFIG_T *cfg) {
   };
 }
 
-static void gpu_fbdraw(AM_GPU_FBDRAW_T *draw) {
-  int x = draw->x, y = draw->y, w = draw->w, h = draw->h;
+static void gpu_fbdrar(AM_GPU_FBDRAR_T *drar) {
+  int x = drar->x, y = drar->y, w = drar->w, h = drar->h;
   int W = display.w, H = display.h;
-  uint32_t *pixels = draw->pixels;
+  uint32_t *pixels = drar->pixels;
   int len = (x + w >= W) ? W - x : w;
   for (int j = 0; j < h; j ++, pixels += w) {
     if (y + j < H) {
@@ -244,7 +244,7 @@ static struct pixel *render(struct gpu_canvas *cv, struct gpu_canvas *parent, st
       panic("invalid node");
   }
 
-  // draw local canvas (w * h) -> px (x1, y1) - (x1 + w1, y1 + h1)
+  // drar local canvas (w * h) -> px (x1, y1) - (x1 + w1, y1 + h1)
   for (int i = 0; i < cv->w1; i++)
     for (int j = 0; j < cv->h1; j++) {
       int x = cv->x1 + i, y = cv->y1 + j;
@@ -317,7 +317,7 @@ static void *lut[128] = {
   [AM_INPUT_CONFIG] = input_config,
   [AM_INPUT_KEYBRD] = input_keybrd,
   [AM_GPU_CONFIG  ] = gpu_config,
-  [AM_GPU_FBDRAW  ] = gpu_fbdraw,
+  [AM_GPU_FBDRAR  ] = gpu_fbdrar,
   [AM_GPU_STATUS  ] = gpu_status,
   [AM_GPU_MEMCPY  ] = gpu_memcpy,
   [AM_GPU_RENDER  ] = gpu_render,

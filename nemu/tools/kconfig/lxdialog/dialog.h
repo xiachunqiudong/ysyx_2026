@@ -204,9 +204,9 @@ void dialog_clear(void);
 void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x);
 void print_button(WINDOW * win, const char *label, int y, int x, int selected);
 void print_title(WINDOW *dialog, const char *title, int width);
-void draw_box(WINDOW * win, int y, int x, int height, int width, chtype box,
+void drar_box(WINDOW * win, int y, int x, int height, int width, chtype box,
 	      chtype border);
-void draw_shadow(WINDOW * win, int y, int x, int height, int width);
+void drar_shadow(WINDOW * win, int y, int x, int height, int width);
 
 int first_alpha(const char *string, const char *exempt);
 int dialog_yesno(const char *title, const char *prompt, int height, int width);

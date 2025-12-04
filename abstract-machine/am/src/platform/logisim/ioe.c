@@ -9,7 +9,7 @@ void __am_timer_rtc(AM_TIMER_RTC_T *);
 void __am_timer_uptime(AM_TIMER_UPTIME_T *);
 void __am_gpu_config(AM_GPU_CONFIG_T *);
 void __am_gpu_status(AM_GPU_STATUS_T *);
-void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *);
+void __am_gpu_fbdrar(AM_GPU_FBDRAR_T *);
 
 static void __am_timer_config(AM_TIMER_CONFIG_T *cfg) { cfg->present = true; cfg->has_rtc = true; }
 static void __am_input_config(AM_INPUT_CONFIG_T *cfg) { cfg->present = true;  }
@@ -22,7 +22,7 @@ static void *lut[128] = {
   [AM_INPUT_CONFIG] = __am_input_config,
   [AM_INPUT_KEYBRD] = __am_input_keybrd,
   [AM_GPU_CONFIG  ] = __am_gpu_config,
-  [AM_GPU_FBDRAW  ] = __am_gpu_fbdraw,
+  [AM_GPU_FBDRAR  ] = __am_gpu_fbdrar,
   [AM_GPU_STATUS  ] = __am_gpu_status,
 };
 
@@ -36,8 +36,8 @@ bool ioe_init() {
 
 void ioe_read (int reg, void *buf) { ((handler_t)lut[reg])(buf); }
 void ioe_write(int reg, void *buf) { 
-  panic_on(reg != AM_GPU_FBDRAW, "invalid reg");
-  __am_gpu_fbdraw(buf);
+  panic_on(reg != AM_GPU_FBDRAR, "invalid reg");
+  __am_gpu_fbdrar(buf);
 }
 
 static uint64_t boot_time = 0;
@@ -75,7 +75,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   };
 }
 
-void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
+void __am_gpu_fbdrar(AM_GPU_FBDRAR_T *ctl) {
   uint32_t *pixels = ctl->pixels;
   if (pixels) {
     uint32_t* const fb = (uint32_t *)0x20000000ul;
@@ -85,7 +85,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
       return;
     }
 
-    panic_on(x + w > W || y + h > H, "bad draw command");
+    panic_on(x + w > W || y + h > H, "bad drar command");
     int len = sizeof(uint32_t) * w;
     uint32_t *p_fb = &fb[y * W + x];
 

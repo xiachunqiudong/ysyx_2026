@@ -193,12 +193,12 @@ do_resize:
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;
 
-	draw_shadow(stdscr, y, x, height, width);
+	drar_shadow(stdscr, y, x, height, width);
 
 	dialog = newwin(height, width, y, x);
 	keypad(dialog, TRUE);
 
-	draw_box(dialog, 0, 0, height, width,
+	drar_box(dialog, 0, 0, height, width,
 		 dlg.dialog.atr, dlg.border.atr);
 	wattrset(dialog, dlg.border.atr);
 	mvwaddch(dialog, height - 3, 0, ACS_LTEE);
@@ -222,8 +222,8 @@ do_resize:
 		      y + box_y + 1, x + box_x + 1);
 	keypad(menu, TRUE);
 
-	/* draw a box around the menu items */
-	draw_box(dialog, box_y, box_x, menu_height + 2, menu_width + 2,
+	/* drar a box around the menu items */
+	drar_box(dialog, box_y, box_x, menu_height + 2, menu_width + 2,
 		 dlg.menubox_border.atr, dlg.menubox.atr);
 
 	if (menu_width >= 80)

@@ -130,12 +130,12 @@ do_resize:
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;
 
-	draw_shadow(stdscr, y, x, height, width);
+	drar_shadow(stdscr, y, x, height, width);
 
 	dialog = newwin(height, width, y, x);
 	keypad(dialog, TRUE);
 
-	draw_box(dialog, 0, 0, height, width,
+	drar_box(dialog, 0, 0, height, width,
 		 dlg.dialog.atr, dlg.border.atr);
 	wattrset(dialog, dlg.border.atr);
 	mvwaddch(dialog, height - 3, 0, ACS_LTEE);
@@ -159,8 +159,8 @@ do_resize:
 
 	keypad(list, TRUE);
 
-	/* draw a box around the list items */
-	draw_box(dialog, box_y, box_x, list_height + 2, list_width + 2,
+	/* drar a box around the list items */
+	drar_box(dialog, box_y, box_x, list_height + 2, list_width + 2,
 		 dlg.menubox_border.atr, dlg.menubox.atr);
 
 	/* Find length of longest item in order to center checklist */
