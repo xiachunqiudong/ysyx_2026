@@ -69,4 +69,15 @@ module ram #(
   //   end
   // end
 
+  string ram_init_path;
+  
+  initial begin
+    if ($value$plusargs("ram_init_path=%s", ram_init_path)) begin
+      $readmemh(ram_init_path, dataArray);
+    end
+    else begin
+      $display("Can not find ram init path!");
+    end
+  end
+
 endmodule
