@@ -3,6 +3,28 @@ package ifu
 import chisel3._
 import chisel3.util._
 
+class leftCircularShift(DW: Int) extends Module {
+  val io = IO(new Bundle {
+    val in       = Input(UInt(DW.W))
+    val shiftNum =  Input(UInt(log2Ceil(DW).W))
+    val out      = Output(UInt(DW.W))
+  })
+
+  val data = io.in
+
+  val shiftCandidates = Wire(Vec(DW, UInt(DW.W)))
+  dontTouch(shiftCandidates)
+
+  shiftCandidates(0) := data
+
+  for (i <- 1 until DW) {
+    shiftCandidates(i) := Cat(data((DW-1-i), 0), data((DW-1), (DW-i)))
+  }
+
+  io.out := Mux1H(UIntToOH(io.shiftNum), shiftCandidates)
+
+}
+
 class InstFifoEntry extends Module {
   val io = IO(new Bundle {
     val wen     = Input(Bool())
@@ -70,12 +92,16 @@ class InstQueue (EntryNum: Int, BankNum: Int, ReadPotr: Int, WritePort: Int) ext
 
   val bankWritePtr_Q = RegInit(0.U(bankPtrWidth.W))
 
+  val fetchValidVecShifter = Module(new leftCircularShift(WritePort))
+  fetchValidVecShifter.io.in       := io.fetchValidVec.asUInt
+  fetchValidVecShifter.io.shiftNum := bankWritePtr_Q
+
+  val fetchValidVecShift = fetchValidVecShifter.io.out
+  dontTouch(fetchValidVecShift)
+
   for (bank <- 0 until BankNum) {
-    InstFifoVec(bank).io.push    := true.B
+    InstFifoVec(bank).io.push    := fetchValidVecShift(bank)
     InstFifoVec(bank).io.inst_In :=  io.fetchInstVec(0)
   }
 
-  
-  val fetchValidVecShift = bitRotateLeft(io.fetchValidVec.asUInt, bankWritePtr_Q)
-  dontTouch(fetchValidVecShift)
 }
