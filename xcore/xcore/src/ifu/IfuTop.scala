@@ -17,6 +17,8 @@ class IfuTop extends XModule {
   val pc_In = Wire(UInt(XLEN.W))
   val pc_Q = RegInit(0.U(XLEN.W))
 
+  val fetchInstVec = Wire(Vec(IFU_WIDTH, UInt(32.W)))
+
   io.ifuARChannel.arValid := true.B
   io.ifuARChannel.arAddr  := pc_Q(PADDR_WIDTH-1,0)
 
@@ -26,6 +28,7 @@ class IfuTop extends XModule {
   for (i <- 0  until IFU_WIDTH) {
     io.instValidVec(i) := io.ifuRChannel.rValid
     io.instVec(i)      := io.ifuRChannel.rData((i+1)*32-1,i*32)
+    fetchInstVec(i)    := io.ifuRChannel.rData((i+1)*32-1,i*32)
   }
 
   pc_In := pc_Q + 4.U
@@ -36,6 +39,12 @@ class IfuTop extends XModule {
     pc_Q := pc_In
   }
 
+  val instQueue = Module(new InstQueue(EntryNum=32, BankNum=4, ReadPotr=4, WritePort=4))
+
+  for (r <- 0 until IFU_WIDTH) {
+    instQueue.io.fetchValidVec(r) := true.B
+    instQueue.io.fetchInstVec(r) := fetchInstVec(r)
+  }
 
 }
 

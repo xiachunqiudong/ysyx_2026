@@ -67,6 +67,10 @@ static int cmd_info(char *args) {
   return 0;
 }
 
+static int cmd_x(char *args) {
+  
+  return 0;
+}
 static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
@@ -86,6 +90,7 @@ static struct {
 } cmd_table [] = {
   { "help", "Display information about all supported commands", cmd_help },
   { "info", "Display information about regfile or watchPoint",  cmd_info },
+  {"x",     "Display memory",                                   cmd_x    },
   { "c",    "Continue the execution of the program",            cmd_c    },
   { "si",   "Single step execution of the program ",            cmd_si   },
   { "q",    "Exit NEMU",                                        cmd_q    },
