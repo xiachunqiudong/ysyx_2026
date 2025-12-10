@@ -2,26 +2,28 @@ package exu
 
 import chisel3._
 import chisel3.util._
+import chisel3.util.experimental.decode._
 import config._
 import xcoreBundle._
 
-trait DecoderTrait {
-  def X = BitPat("b?")
-  def N = BitPat("b0")
-  def Y = BitPat("b1")
+
+class InstInfoPla extends XModule {
+  val io = IO(new Bundle{
+    val inst    = Input(UInt(32.W))
+    val instDcd = Output(new InstDcd()) 
+  })
+
+  val instDcd = Wire(UInt(3.W))
+
+  instDcd := decoder(io.inst, RV32I_InstTable.RV32I_MAP)
+
+  io.instDcd.src1Ren := instDcd(0)
+  io.instDcd.src2Ren := instDcd(1)
+  io.instDcd.dstWen  := instDcd(2)
+
 }
 
-// object RVI_instTable extends DecoderTrait{
-
-//   def ADD                = BitPat("b0000000??????????000?????0110011")
-//   def SUB                = BitPat("b0000001??????????000?????0110011")
-
-//   val table: Array[(BitPat, List[BitPat])] = Array(ADD -> List(Y, N),
-//                                                    SUB -> List(Y, N))
-
-// }
-
-class Decoder extends XModule with DecoderTrait{
+class Decoder extends XModule {
   val io = IO(new Bundle{
     val inst = Input(UInt(32.W))
     val uop  = Output(new Uop)
@@ -31,6 +33,14 @@ class Decoder extends XModule with DecoderTrait{
   io.uop.lsrc2 := io.inst(24,20)
   io.uop.ldst  := io.inst(11,7)
 
-  // val inst_code = ListLookup(io.inst, List(Y, N), RVI_instTable.table)
+  val instDcd = Wire(new InstDcd())
 
+  val instInfoPla = Module(new InstInfoPla)
+
+  instInfoPla.io.inst := io.inst
+
+  instDcd := instInfoPla.io.instDcd
+
+
+  
 }
